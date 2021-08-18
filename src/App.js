@@ -6,7 +6,12 @@ import {
 	Redirect,
 } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import { CharactersPage, EpisodesPage, LocationsPage } from './pages';
+import {
+	CharactersPage,
+	EpisodesPage,
+	LocationsPage,
+	MyWatchListPage,
+} from './pages';
 
 const App = () => {
 	return (
@@ -15,8 +20,8 @@ const App = () => {
 			<Switch>
 				<Route path='/characters' component={CharactersPage} />
 				<Route path='/episodes' component={EpisodesPage} />
-				<Route path='/locations' component={LocationsPage}/>
-				<Route path='/my-watch-list' />
+				<Route path='/locations' component={LocationsPage} />
+				<Route path='/my-watch-list' component={MyWatchListPage} />
 				<Redirect exact from='/' to='characters' />
 			</Switch>
 		</Router>

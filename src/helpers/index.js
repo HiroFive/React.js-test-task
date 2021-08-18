@@ -1,2 +1,2 @@
-import API  from './request';
-export { API };
+import {APIGetCall} from './request';
+export {  APIGetCall };

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 const Pagination = (props) => {
-	const { maxPages, currentPage, setCurrentPage } = props;
+	const { maxPages= '1', currentPage, setCurrentPage } = props;
     
 	const numberArray = Array.apply(null, { length: maxPages + 1 }).map(
 		Number.call,

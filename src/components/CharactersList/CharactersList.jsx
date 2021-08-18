@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { API } from '../../helpers';
+import { APIGetCall } from '../../helpers';
 import ListItem from './ListItem';
 import Pagination from '../Pagination';
 import Modal from '../Modal';
@@ -13,6 +13,7 @@ const CharactersList = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [modalData, setModalData] = useState({});
 	const [filterValues, setFilterValues] = useState('');
+	const [filterErrors, setFilterErrors] = useState('');
 	const modalParams = [
 		modalData.name,
 		modalData
@@ -23,13 +24,14 @@ const CharactersList = () => {
 	};
 	useEffect(() => {
 		setLoading(true);
-		API.get(`/character?page=${currentPage}${filterValues}`)
-			.then((response) => response.data)
+		APIGetCall(`/character?page=${currentPage}${filterValues}`)
+			.then((response) => response.json())
 			.then((res) => {
 				setCharacters(res.results);
 				setPages(res.info.pages);
 				setLoading(false);
-			});
+			})
+			.catch(() => setFilterErrors('Sorry, data not found'));
 	}, [currentPage, filterValues]);
 	return (
 		<>
@@ -40,7 +42,7 @@ const CharactersList = () => {
 			/>
 			{!loading ? (
 				<div>
-					<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-7 gap-2'>
+					<div className='grid-container'>
 						{characters.map((item, index) => (
 							<ListItem key={index} data={item} setModalData={setModalData} />
 						))}
@@ -54,7 +56,10 @@ const CharactersList = () => {
 					</div>
 				</div>
 			) : (
-				<p>loading</p>
+				<div className='container-center'>
+					<p>loading...</p>
+					<div>{filterErrors}</div>
+				</div>
 			)}
 			{Object.keys(modalData).length !== 0 ? (
 				<Modal

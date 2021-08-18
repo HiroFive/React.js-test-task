@@ -2,3 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+.grid-container {
+	@apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-7 gap-2;
+}
+.grid-container-sm {
+	@apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-2;
+}
+.container-center {
+	@apply mx-auto items-center justify-center max-w-lg text-center mt-5;
+}
+.add-new-item-btn {
+	@apply w-full max-h-9 sm:mx-2 my-2 sm:my-4 mb-2 rounded-md cursor-pointer md:mb-0 bg-green-500 px-5 py-2 text-sm shadow-sm font-medium tracking-wider hover:bg-green-600 text-white hover:shadow-lg;
+}

@@ -45,7 +45,7 @@ const FilterBar = ({ filterValues, filterElements, setFilterValues }) => {
 	return (
 		<div className='container flex items-center justify-center mx-auto p-2'>
 			<div>
-				<h2 className='text-2xl font-semibold leading-tight mr-1'>Filters: </h2>
+				<h2 className='text-2xl font-semibold leading-tight mr-1 text-green-500'>Filters: </h2>
 			</div>
 			<div className='my-2 flex sm:flex-row flex-col'>
 				<div className='flex flex-row mb-1 sm:mb-0'>
@@ -56,7 +56,7 @@ const FilterBar = ({ filterValues, filterElements, setFilterValues }) => {
 								{id === 'search' ? (
 									<div className='block relative mx-1'>
 										<span className='h-full absolute inset-y-0 left-0 flex items-center pl-2'>
-											<img src={ArrowDown} className='h-4 w-4' />
+											<img src={Search} className='h-4 w-4' />
 										</span>
 										<input
 											placeholder={placeholder}
@@ -79,7 +79,7 @@ const FilterBar = ({ filterValues, filterElements, setFilterValues }) => {
 											))}
 										</select>
 										<div className='pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700'>
-											<img src={Search} className='h-4 w-4' />
+											<img src={ArrowDown} className='h-4 w-4' />
 										</div>
 									</div>
 								)}

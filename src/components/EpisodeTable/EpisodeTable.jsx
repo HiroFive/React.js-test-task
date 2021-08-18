@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { API } from '../../helpers';
+import { APIGetCall } from '../../helpers';
 import Pagination from '../Pagination';
-import Modal from '../Modal';
 import FilterBar from '../FilterBar';
 import filterElements from './filterElements';
 import Table from '../Table';
@@ -9,21 +8,21 @@ import Table from '../Table';
 const EpisodesTable = () => {
 	const [loading, setLoading] = useState(false);
 	const [episodes, setEpisodes] = useState([{}]);
-	const [pages, setPages] = useState(0);
+	const [pages, setPages] = useState(1);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [filterValues, setFilterValues] = useState('');
+	const [filterErrors, setFilterErrors] = useState('');
 	const columnTitle = ['Name', 'Air date', 'Episode'];
 	useEffect(() => {
 		setLoading(true);
-		API.get(`/episode?page=${currentPage}${filterValues}`)
-			.then((response) => response.data)
+		APIGetCall(`/episode?page=${currentPage}${filterValues}`)
+			.then((response) => response.json())
 			.then((res) => {
-				console.log(res);
-
 				setEpisodes(res.results);
 				setPages(res.info.pages);
 				setLoading(false);
-			});
+			})
+			.catch(() => setFilterErrors('Sorry, data not found'));
 	}, [currentPage, filterValues]);
 
 	return (
@@ -45,7 +44,10 @@ const EpisodesTable = () => {
 					</div>
 				</div>
 			) : (
-				<p>loading</p>
+				<div className='container-center'>
+					<p>loading...</p>
+					<div>{filterErrors}</div>
+				</div>
 			)}
 		</>
 	);

@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 const ListItem = ({ data, setModalData}) => {
 	return (
 		<div className=' max-w-sm w-full sm:w-full lg:w-full py-6 px-3'>
-			<div className=' h-full border-2 border-gray-200 bg-white shadow-xl rounded-lg overflow-hidden'>
+			<div className=' h-full border border-gray-200 bg-white shadow-xl rounded-lg overflow-hidden'>
 				<div className='flex items-center justify-center'>
-					<img src={data.image} className='h-56 w-full' />
+					<img src={data.image} className='h-68 sm-56 w-full' />
 				</div>
 
 				<div className='p-4'>

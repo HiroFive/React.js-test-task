@@ -1,5 +1,7 @@
 env:
   es2021: true
+  browser: true
+  node: true
 
 parserOptions:
   ecmaVersion: 2021
@@ -7,4 +9,4 @@ parserOptions:
 
 extends:
   - eslint:recommended
-  - plugin:@typescript-eslint/recommended
+  - plugin:react/recommended

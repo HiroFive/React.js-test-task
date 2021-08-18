@@ -1,12 +1,17 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import links from './links';
 
 import RickAndMorty from '../../assets/icons/RickAndMorty.svg';
+import Menu from '../../assets/icons/Menu.svg';
+
 const Navbar = () => {
 	const [mobileMenuOpen, setOpenMobileMenu] = useState(false);
 	const history = useHistory();
-
+	const handleMenuOpenClose = () =>{
+		setOpenMobileMenu(!mobileMenuOpen)
+	}
 	const refreshPage = () => {
 		history.go(0);
 	};
@@ -24,18 +29,16 @@ const Navbar = () => {
 					<button
 						className='flex items-center px-3 py-2 border rounded'
 						type='button'
+						onClick={handleMenuOpenClose}
 					>
-						<svg
-							className='h-3 w-3'
-							viewBox='0 0 20 20'
-							xmlns='http://www.w3.org/2000/svg'
-						>
-							<title>Menu</title>
-							<path d='M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z' />
-						</svg>
+						<img src={Menu} title='Menu' className='h-3 w-3' />
 					</button>
 				</div>
-				<div className='w-full md:w-auto md:flex-grow md:flex md:items-center'>
+				<div
+					className={`${
+						mobileMenuOpen ? 'block' : 'hidden'
+					} w-full md:w-auto md:flex-grow md:flex md:items-center`}
+				>
 					<ul className='flex flex-col mt-4 -mx-4 pt-4 border-t md:flex-row md:items-center md:mx-0 md:mt-0 md:pt-0 md:mr-4 lg:mr-8 md:border-0'>
 						{links.map(({ title, to }, index) => (
 							<li key={index}>
