@@ -5,7 +5,7 @@ import DoneArrow from '../../assets/icons/DoneArrow.svg';
 const ListItem = ({ data, setWatchListData, watchListData }) => {
 	const [done, setDone] = useState(data.done);
 
-	const handleOnChangeCheckbox = (e) => {
+	const handleChangeCheckbox = (e) => {
 		setDone(e.target.checked);
 		const updateValue = watchListData.map((item) => {
 			if (item.id === data.id) {
@@ -15,7 +15,15 @@ const ListItem = ({ data, setWatchListData, watchListData }) => {
 		});
 		setWatchListData(updateValue);
 	};
-
+	const handleDelete = () => {
+		watchListData.splice(
+			watchListData.findIndex((item) => {
+				return item.id === data.id;
+			}),
+			1
+		);
+		setWatchListData([...watchListData]);
+	};
 	return (
 		<div className='m-3 max-w-lg'>
 			<div className='w-full max-w-xl border border-gray-200 shadow-lg rounded-xl bg-white px-4 pt-2'>
@@ -34,14 +42,17 @@ const ListItem = ({ data, setWatchListData, watchListData }) => {
 									type='checkbox'
 									checked={done}
 									className='opacity-0 absolute'
-									onChange={handleOnChangeCheckbox}
+									onChange={handleChangeCheckbox}
 								/>
 								{done ? <img src={DoneArrow} className='h-3 w-3' /> : null}
 							</div>
 							<div className='select-none text-gray-800 text-sm'>Done</div>
 						</label>
 						<div className='flex justify-end'>
-							<button className='bg-red-500 border border-red-500 px-3 py-1 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-red-600'>
+							<button
+								onClick={handleDelete}
+								className='bg-red-500 border border-red-500 px-3 py-1 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-red-600'
+							>
 								Delete
 							</button>
 						</div>
